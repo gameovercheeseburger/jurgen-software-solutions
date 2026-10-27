@@ -270,3 +270,4 @@ footer .wrap { padding-block: 40px 32px; display: grid; gap: 24px; }
   .etl-stage { grid-row: span 3; grid-template-rows: subgrid; }
   .etl-arrow { grid-row: 1 / span 3; }
 }
+.portrait { object-fit: cover; object-position: center 30%; width: 180px; height: 180px; }

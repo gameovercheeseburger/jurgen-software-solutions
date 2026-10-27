@@ -283,7 +283,7 @@ PAGES["owner.html"] = ("Patrik Santiago · Jurgen Software Solutions", "Patrik S
 <section class="block">
   <div class="wrap">
     <div class="owner-top reveal">
-      <div class="portrait" aria-hidden="true">PS</div>
+      <img class="portrait" src="assets/patrik.jpg" alt="Patrik Santiago" width="400" height="400">
       <div style="display:grid;gap:10px">
         <p class="owner-role">Enterprise experience, small-firm attention.</p>
         <p>Patrik is a software engineer with over five years of experience at IBM, Infor and Accenture, building and supporting enterprise applications for ERP, finance, banking, insurance and reporting systems. He specializes in ETL and data pipelines, and his work spans C#/.NET and Java backends, React interfaces, SQL databases, cloud platforms and AI-assisted development. He founded Jurgen Software Solutions to bring that enterprise-grade discipline to businesses of every size.</p>
