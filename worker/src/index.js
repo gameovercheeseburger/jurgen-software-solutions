@@ -3,7 +3,11 @@
 // so the key never reaches the browser.
 import Anthropic from "@anthropic-ai/sdk";
 
-const ALLOWED_ORIGINS = ["https://gameovercheeseburger.github.io"];
+const ALLOWED_ORIGINS = [
+  "https://www.jurgensoftwaresolutions.com",
+  "https://jurgensoftwaresolutions.com",
+  "https://gameovercheeseburger.github.io",
+];
 const MAX_TURNS = 20;
 const MAX_CHARS = 2000;
 
