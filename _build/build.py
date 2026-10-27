@@ -215,16 +215,17 @@ PAGES["index.html"] = ("Jurgen Software Solutions", "Custom software, ETL and da
   <div class="wrap">
     <div class="two reveal">
       <div class="head">
-        <span class="eyebrow">What we do</span>
-        <h2>From the first line of code to AI</h2>
+        <span class="eyebrow">Explore</span>
+        <h2>Find what you need</h2>
       </div>
-      <div class="stack">
-        <p class="muted">Twelve service areas covering the whole technology stack, with a specialty in ETL and data pipelines.</p>
-        <a class="more" href="services.html">See all services</a>
-      </div>
+      <p class="muted">Each part of the company has its own page. Pick where you want to go.</p>
     </div>
-    <div class="services">
-{"".join(svc(*s) for s in SERVICES[:6])}    </div>
+    <div class="doors reveal">
+      <a class="door" href="services.html"><span class="eyebrow">Services</span><h3>What we do</h3><p>ETL and data pipelines, AI, custom software, cloud and more.</p><span class="more">View services</span></a>
+      <a class="door" href="about.html"><span class="eyebrow">About</span><h3>Who we are</h3><p>Our mission, our method and how we work with clients.</p><span class="more">About us</span></a>
+      <a class="door" href="owner.html"><span class="eyebrow">Owner</span><h3>Patrik Santiago</h3><p>Founder and owner, with enterprise experience at IBM, Infor and Accenture.</p><span class="more">Meet the owner</span></a>
+      <a class="door" href="contact.html"><span class="eyebrow">Contact</span><h3>Get a quote</h3><p>Tell us about your project and we will reply within one business day.</p><span class="more">Contact us</span></a>
+    </div>
   </div>
 </section>
 

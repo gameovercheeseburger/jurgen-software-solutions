@@ -74,6 +74,9 @@ export default {
     const messages = cleanMessages(body.messages);
     if (!messages) return json({ error: "Invalid conversation." }, 400, origin);
 
+    if (!env.ANTHROPIC_API_KEY) {
+      return json({ error: "The assistant is not set up yet. Please email patrik.j.santiago@gmail.com." }, 503, origin);
+    }
     const client = new Anthropic({ apiKey: env.ANTHROPIC_API_KEY });
     try {
       const response = await client.beta.messages.create({
