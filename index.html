@@ -144,6 +144,32 @@ footer .wrap { padding-block: 40px 32px; display: grid; gap: 24px; }
 .links a { color: var(--navy-fg); }
 .links a:hover { color: var(--brass); }
 .copy { font-size: .8rem; opacity: .7; border-top: 1px solid rgba(201,168,101,.3); padding-top: 18px; }
+
+/* Quote form */
+.btn.ghost-dark { background: transparent; color: var(--ink); }
+dialog.quote-dlg { border: 1px solid var(--rule); border-top: 3px double var(--brass); background: var(--paper); color: var(--ink); padding: 0; width: min(640px, calc(100vw - 32px)); max-height: calc(100dvh - 32px); overflow: auto; }
+dialog.quote-dlg::backdrop { background: rgba(10, 17, 29, .6); }
+.dlg-inner { padding: 28px clamp(20px, 4vw, 36px) 32px; display: grid; gap: 20px; }
+.dlg-head { display: flex; justify-content: space-between; align-items: start; gap: 16px; }
+.dlg-head h2 { font-size: clamp(1.6rem, 4vw, 2rem); }
+.dlg-close { background: none; border: 0; color: var(--muted); font-size: 1.8rem; line-height: 1; cursor: pointer; padding: 0 4px; }
+.dlg-close:hover { color: var(--ink); }
+.qform { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 18px; }
+@media (max-width: 560px) { .qform { grid-template-columns: 1fr; } }
+.qform .full { grid-column: 1 / -1; }
+.field { display: grid; gap: 6px; min-width: 0; }
+.field label { font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.field label .opt { font-weight: 400; letter-spacing: 0; text-transform: none; }
+.field input, .field textarea { font: inherit; font-size: 1rem; color: var(--ink); background: var(--paper-2); border: 1px solid var(--rule); border-radius: 0; padding: 10px 12px; width: 100%; }
+.field textarea { min-height: 140px; resize: vertical; }
+.field input:focus, .field textarea:focus { outline: 2px solid var(--brass); outline-offset: 1px; border-color: var(--brass); }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.form-actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.form-actions .btn, .sent .btn { cursor: pointer; font-family: var(--body); }
+.form-actions .btn[disabled] { opacity: .6; cursor: progress; }
+.form-status { font-size: .95rem; margin: 0; }
+.form-status.err { color: #b3402e; }
+.sent { display: grid; gap: 12px; justify-items: start; }
 </style>
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)} body{margin:0} img{max-width:100%}</style>
 </head>
@@ -169,7 +195,7 @@ footer .wrap { padding-block: 40px 32px; display: grid; gap: 24px; }
     <h1>Software Built to Last</h1>
     <p class="tagline">Careful engineering for businesses that expect it done properly.</p>
     <p class="lead">Jurgen Software Solutions handles every part of your technology, from custom code and websites to AI, cloud, data and ongoing support. Led by an engineer with enterprise experience at IBM, Infor and Accenture, we work in short, visible iterations, so you see progress every week and never wonder where your project stands.</p>
-    <div class="cta"><a class="btn solid" href="#contact">Request a quote</a><a class="btn ghost" href="#services">Our services</a></div>
+    <div class="cta"><a class="btn solid" href="#contact" data-quote>Request a quote</a><a class="btn ghost" href="#services">Our services</a></div>
   </div>
 </section>
 
@@ -341,8 +367,9 @@ footer .wrap { padding-block: 40px 32px; display: grid; gap: 24px; }
     <div class="email-box">
       <span class="eyebrow">Email</span>
       <a id="email" href="mailto:patrik.j.santiago@gmail.com">patrik.j.santiago@gmail.com</a>
-      <button type="button" id="copy-email" class="btn solid">Copy email</button>
+      <button type="button" id="copy-email" class="btn ghost-dark">Copy email</button>
     </div>
+    <a class="btn solid" href="#contact" data-quote>Request a quote</a>
     <script>
       document.getElementById('copy-email').addEventListener('click', function () {
         var btn = this, addr = 'patrik.j.santiago@gmail.com';
@@ -369,5 +396,91 @@ footer .wrap { padding-block: 40px 32px; display: grid; gap: 24px; }
   </div>
 </footer>
 
+
+<dialog class="quote-dlg" id="quote-dialog" aria-labelledby="quote-title">
+  <div class="dlg-inner">
+    <div class="dlg-head">
+      <div style="display:grid;gap:6px">
+        <span class="eyebrow">Request a quote</span>
+        <h2 id="quote-title">Tell us about your project</h2>
+      </div>
+      <button type="button" class="dlg-close" id="quote-close" aria-label="Close">&times;</button>
+    </div>
+    <form class="qform" id="quote-form" novalidate>
+      <div class="field"><label for="q-first">First name</label><input id="q-first" name="First name" autocomplete="given-name" required></div>
+      <div class="field"><label for="q-last">Last name</label><input id="q-last" name="Last name" autocomplete="family-name" required></div>
+      <div class="field"><label for="q-email">Email</label><input id="q-email" name="email" type="email" autocomplete="email" required></div>
+      <div class="field"><label for="q-phone">Phone <span class="opt">(optional)</span></label><input id="q-phone" name="Phone" type="tel" autocomplete="tel"></div>
+      <div class="field full"><label for="q-subject">Subject</label><input id="q-subject" name="Subject" required></div>
+      <div class="field full"><label for="q-body">Message</label><textarea id="q-body" name="Message" required placeholder="What do you need built, and by when?"></textarea></div>
+      <div class="hp" aria-hidden="true"><label for="q-honey">Leave empty</label><input id="q-honey" name="_honey" tabindex="-1" autocomplete="off"></div>
+      <div class="form-actions full">
+        <button type="submit" class="btn solid" id="q-send">Send request</button>
+        <p class="form-status" id="q-status" role="status" aria-live="polite"></p>
+      </div>
+    </form>
+    <div class="sent" id="quote-sent" hidden>
+      <h3>Thank you. Your request was sent.</h3>
+      <p class="muted" id="q-sent-msg">We will reply by email within one business day.</p>
+      <button type="button" class="btn solid" id="quote-done">Close</button>
+    </div>
+  </div>
+</dialog>
+<script>
+(function () {
+  var ENDPOINT = 'https://formsubmit.co/ajax/patrik.j.santiago@gmail.com';
+  var dlg = document.getElementById('quote-dialog');
+  var form = document.getElementById('quote-form');
+  var sent = document.getElementById('quote-sent');
+  var status = document.getElementById('q-status');
+  var sendBtn = document.getElementById('q-send');
+  if (!dlg || typeof dlg.showModal !== 'function') return;
+
+  function open(e) {
+    e.preventDefault();
+    form.hidden = false; sent.hidden = true; status.textContent = ''; status.className = 'form-status';
+    dlg.showModal();
+    document.getElementById('q-first').focus();
+  }
+  document.querySelectorAll('[data-quote]').forEach(function (a) { a.addEventListener('click', open); });
+  document.getElementById('quote-close').addEventListener('click', function () { dlg.close(); });
+  document.getElementById('quote-done').addEventListener('click', function () { dlg.close(); });
+  dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!form.checkValidity()) {
+      var bad = form.querySelector(':invalid');
+      status.className = 'form-status err';
+      status.textContent = bad && bad.type === 'email' && bad.value ? 'Enter a valid email address.' : 'Please fill in every required field.';
+      if (bad) bad.focus();
+      return;
+    }
+    var data = {};
+    new FormData(form).forEach(function (v, k) { data[k] = v; });
+    data._subject = 'Quote request: ' + data.Subject;
+    data._replyto = data.email;
+    data._template = 'table';
+    data._captcha = 'false';
+    sendBtn.disabled = true; sendBtn.textContent = 'Sending...';
+    status.className = 'form-status'; status.textContent = '';
+    fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(data) })
+      .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { ok: r.ok, j: j }; }); })
+      .then(function (res) {
+        if (res.ok && String(res.j.success) === 'true') {
+          document.getElementById('q-sent-msg').textContent = 'We will reply to ' + data.email + ' within one business day.';
+          form.reset(); form.hidden = true; sent.hidden = false;
+        } else {
+          throw new Error(res.j.message || 'not sent');
+        }
+      })
+      .catch(function () {
+        status.className = 'form-status err';
+        status.textContent = 'Your request could not be sent. Please try again, or email patrik.j.santiago@gmail.com directly.';
+      })
+      .then(function () { sendBtn.disabled = false; sendBtn.textContent = 'Send request'; });
+  });
+})();
+</script>
 </body>
 </html>
