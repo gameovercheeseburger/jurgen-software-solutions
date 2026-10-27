@@ -3,6 +3,7 @@
 Run:  python _build/build.py   (from the site folder, or pass the site folder as an argument)
 Edit page content below, then re-run to regenerate the .html files.
 """
+import hashlib
 import os
 import sys
 
@@ -12,6 +13,11 @@ NAV = [("index.html", "Home"), ("services.html", "Services"), ("about.html", "Ab
        ("owner.html", "Owner"), ("contact.html", "Contact")]
 
 SHIELD = '<svg class="shield" viewBox="0 0 14 16" aria-hidden="true"><path d="M7 0 14 3v5c0 4-3 7-7 8-4-1-7-4-7-8V3z" fill="currentColor"/></svg>'
+
+
+def ver(path):
+    with open(os.path.join(SITE, path), 'rb') as f:
+        return hashlib.md5(f.read()).hexdigest()[:8]
 
 
 def head(title, desc):
@@ -26,7 +32,7 @@ def head(title, desc):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,500;0,600;1,500&family=Mulish:wght@400;600;700&display=swap">
-<link rel="stylesheet" href="assets/styles.css">
+<link rel="stylesheet" href="assets/styles.css?v={ver('assets/styles.css')}">
 </head>
 <body>
 '''
@@ -47,7 +53,7 @@ def header(active):
 '''
 
 
-FOOTER = '''<footer>
+FOOTER = lambda: f'''<footer>
   <div class="wrap">
     <div class="foot-top">
       <a class="brand" href="index.html"><img class="logo" src="assets/logo.png" alt="Jurgen Software Solutions" width="520" height="139"></a>
@@ -61,7 +67,7 @@ FOOTER = '''<footer>
     <p class="copy">© 2026 Jurgen Software Solutions. All rights reserved.</p>
   </div>
 </footer>
-<script src="assets/site.js"></script>
+<script src="assets/site.js?v={ver('assets/site.js')}"></script>
 </body>
 </html>
 '''
@@ -363,7 +369,7 @@ PAGES["contact.html"] = ("Contact · Jurgen Software Solutions", "Request a quot
 
 for name, (title, desc, body) in PAGES.items():
     active = name
-    html = head(title, desc) + header(active) + "\n<main>\n" + body + "</main>\n\n" + FOOTER
+    html = head(title, desc) + header(active) + "\n<main>\n" + body + "</main>\n\n" + FOOTER()
     with open(os.path.join(SITE, name), "w", encoding="utf-8", newline="\n") as f:
         f.write(html)
     print("wrote", name)

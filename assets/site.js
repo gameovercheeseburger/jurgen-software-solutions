@@ -14,16 +14,16 @@
   onScroll();
 
   /* Fade sections up as they come into view */
-  var reveals = document.querySelectorAll('.reveal');
+  // Only sections that start below the fold are hidden, so nothing on screen ever waits to appear.
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
-        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        if (e.isIntersecting) { e.target.classList.remove('below'); io.unobserve(e.target); }
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-    reveals.forEach(function (el) { io.observe(el); });
-  } else {
-    reveals.forEach(function (el) { el.classList.add('in'); });
+    document.querySelectorAll('.reveal').forEach(function (el) {
+      if (el.getBoundingClientRect().top > window.innerHeight) { el.classList.add('below'); io.observe(el); }
+    });
   }
 
   /* Copy email button */
