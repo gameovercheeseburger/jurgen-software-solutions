@@ -264,3 +264,9 @@ footer .wrap { padding-block: 40px 32px; display: grid; gap: 24px; }
 @keyframes flow-down { from { top: 0; opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } to { top: calc(100% - 8px); opacity: 0; } }
 .svc.etl-card { background: var(--paper-2); }
 .svc.etl-card h3::after { content: " · Specialty"; font-family: var(--body); font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--brass); vertical-align: middle; }
+/* Line up the header, body and security rows across all three ETL stages */
+@media (min-width: 861px) {
+  .etl-flow { grid-template-rows: auto 1fr auto; }
+  .etl-stage { grid-row: span 3; grid-template-rows: subgrid; }
+  .etl-arrow { grid-row: 1 / span 3; }
+}
