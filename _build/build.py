@@ -54,7 +54,7 @@ FOOTER = '''<footer>
       <div>
         <div class="links-title">Our other work</div>
         <ul class="links">
-          <li><a href="https://claude.ai/artifact/DDEsM4jWU7hUABC9ArziNf" target="_blank" rel="noopener">Division Worksheet</a></li>
+          <li><a href="https://github.com/gameovercheeseburger/AnthropicJobHunt" target="_blank" rel="noopener">Anthropic Job Hunt</a></li>
         </ul>
       </div>
     </div>
