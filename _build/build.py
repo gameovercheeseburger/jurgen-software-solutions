@@ -315,7 +315,7 @@ PAGES["owner.html"] = ("Patrik Santiago · Jurgen Software Solutions", "Patrik S
     <div class="stack reveal">
       <h3>Career</h3>
       <ol class="career">
-        <li><span class="when">2025 – 2026</span><div><strong>Application Developer, IBM</strong><p>Java Spring Boot microservices and REST APIs on Red Hat OpenShift; production incident resolution with Splunk; secure coding and validation of AI-generated code.</p></div></li>
+        <li><span class="when">2025 – 2026</span><div><strong>Software Developer, IBM</strong><p>Java Spring Boot microservices and REST APIs on Red Hat OpenShift; production incident resolution with Splunk; secure coding and validation of AI-generated code.</p></div></li>
         <li><span class="when">2020 – 2023</span><div><strong>Software Engineer, Infor</strong><p>C# and Java APIs for ERP, finance and reporting; React dashboards; ETL pipelines with SSIS, PowerShell and Python, and data warehousing on AWS; CI/CD with Jenkins and Docker.</p></div></li>
         <li><span class="when">2019 – 2020</span><div><strong>Associate Software Engineer, Accenture</strong><p>Oracle Sales Cloud integrations with Java, Groovy, SOAP and REST for banking and insurance clients; ETL with Oracle Data Integrator; cut testing errors by 45%.</p></div></li>
         <li><span class="when">2018</span><div><strong>Project &amp; Automation Intern, Accenture</strong><p>Reporting and scheduling tools in C#, VBA and SQL Server; reduced manual reporting time by 40%.</p></div></li>
